@@ -1,38 +1,19 @@
 ---
 type: "project" # DON'T TOUCH THIS ! :)
 date: "2025-06-15" # Date you first upload your project.
-# Title of your project (we like creative title)
 title: "Practice extracting functional signals from specific brain region"
-
-# List the names of the collaborators within the [ ]. If alone, simple put your name within []
 names: [Yiping Lu]
-
-# Your project GitHub repository URL
 github_repo: https://github.com/yipinnng/yiping_project
-
-# If you are working on a project that has website, indicate the full url including "https://" below or leave it empty.
-website:
-
-# List +- 4 keywords that best describe your project within []. Note that the project summary also involves a number of key words. Those are listed on top of the [github repository](https://github.com/PSY6983-2021/project_template), click `manage topics`.
-# Please only lowercase letters
 tags: [fmri, hippocampus, navigation, brainhack]
-
-# Summarize your project in < ~75 words. This description will appear at the top of your page and on the list page with other projects..
-
 summary: "This project aims to extract and analyze fMRI signals from the hippocampus during spatial navigation, using a reproducible workflow based on open tools and data formats."
-
-# If you want to add a cover image (listpage and image in the right), add it to your directory and indicate the name
-# below with the extension.
-image: ""
 ---
-<!-- This is an html comment and this won't appear in the rendered page. You are now editing the "content" area, the core of your description. Everything that you can do in markdown is allowed below. We added a couple of comments to guide your through documenting your progress. -->
 
 ## Project definition
 
 ### Background
 
 Spatial navigation is a complex cognitive function requiring the integration of diverse sensory inputs to compute goal locations and update self-position during movement. These inputs can be broadly categorized into allocentric and egocentric. Effective navigation depends on the dynamic interaction between these two spatial strategies.
-
+s
 To further investigate how the brain transforms between allocentric and egocentric representations, we developed a virtual environment in which participants navigate from a first-person perspective or learn routes from a top-down map. By manipulating the learning and retrieval modalities (e.g., first-person learning followed by top-down retrieval, and vice versa), we aim to examine the neural mechanisms underlying the transformation between spatial reference frames and the role of non-primary sensory information in navigation.
 
 To address the aims, I’ll observe the connectivity between brain regions, but the virtual map still need a pilot test before recruiting participants. So for my proposal pitch in brain hack school is to practice using NiBabel to extract functional signals from specific brain regions based on EPI data. And I choose hippocampus cause it’s a region can integrate the spatial information to form a cognitive map in our brain.
