@@ -90,6 +90,7 @@ We then extracted signals specific to the hippocampus by multiplying each image 
 
 An example of the hippocampus mask from AAL2 and hippocampus-masked output are shown below:
 
-![Hippocampus Beta Map](figures/figure3.png.png)
-![Hippocampus Beta Map](figures/figure2.png.png)
+![Hippocampus Beta Map](figures/figure3.png)
+
+![Hippocampus Beta Map](figures/figure2.png)
 
