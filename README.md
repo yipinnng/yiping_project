@@ -37,8 +37,6 @@ To further investigate how the brain transforms between allocentric and egocentr
 
 To address the aims, I’ll observe the connectivity between brain regions, but the virtual map still need a pilot test before recruiting participants. So for my proposal pitch in brain hack school is to practice using NiBabel to extract functional signals from specific brain regions based on EPI data. And I choose hippocampus cause it’s a region can integrate the spatial information to form a cognitive map in our brain.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PTYs_JFKsHI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ### Tools
 
 The project will rely on the following technologies:
@@ -63,47 +61,35 @@ At the end of this project, we will have:
 
 ### Progress overview
 
-The project was swiftly initiated by P Bellec, based on the existing template created in 2019 by Tristan Glatard and improved by different students. It was really not that hard. Community feedback is expected to lead to rapid further improvements of this first version.
+This project began with selecting and preparing a task-based fMRI dataset from a previous spatial navigation experiment conducted in our lab. The data were converted to BIDS format and preprocessed to ensure compatibility with analysis tools.
+
+Using Python-based neuroimaging libraries such as Nibabel and Nilearn, I extracted time-series signals from the hippocampus using a predefined mask. Additionally, I aligned the subject's brain image to MNI space for standardized analysis and applied the AAL2 atlas for anatomical reference.
 
 ### Tools I learned during this project
 
- * **Meta-project** P Bellec learned how to do a meta project for the first time, which is developping a framework while using it at the same time. It felt really weird, but somehow quite fun as well.
- * **Github workflow-** The successful use of this template approach will demonstrate that it is possible to incorporate dozens of students presentation on a website collaboratively over a few weeks.
- * **Project content** Through the project reports generated using the template, it is possible to learn about what exactly the brainhack school students are working on.
+ - **Nibabel**: I learned how to load, manipulate, and save NIfTI images using Nibabel, which helped me extract fMRI signals from specific brain regions such as the hippocampus.
+ - **Nilearn**: I used Nilearn's `resample_to_img` function to match spatial resolution between brain images and anatomical masks, ensuring accurate region-of-interest extraction.
+ - **ANTs (Advanced Normalization Tools)**: I applied nonlinear image registration using `ants.registration` to align subject-specific images to the MNI standard brain. This taught me how to implement spatial normalization in a reproducible way.
+ - **Python scripting**: Through scripting with loops and conditionals, I automated the processing of multiple runs and trials across different image types (e.g., t-values and betas), which helped streamline my analysis workflow.
 
 ### Results
 
-#### Deliverable 1: report template
+#### Image registration to MNI space
 
-You are currently reading the report template! I will let you judge whether it is useful or not. If you think there is something that could be improved, please do not hesitate to open an issue [here](https://github.com/PSY6983-2021/project_template/issues/) and let us know.
+All beta images from the spatial navigation task (spanning 8 runs and 7 trials) were registered to the MNI152 standard brain using the ANTs library. The `SyN` nonlinear transformation ensured that each subject-specific image was accurately aligned to a common anatomical space.
 
-#### Deliverable 2: project gallery
+Each output was visually inspected to verify successful alignment, and the registered images were saved for downstream analysis. These MNI-aligned images enable consistent anatomical localization across trials and facilitate integration with standard atlases like AAL2.
 
-You can check out the [2020 BrainHack School project gallery](https://psy6983.brainhackmtl.org/project/)
+![Hippocampus Beta Map](figures/figure1.png)
 
-##### ECG pupilometry pipeline by Marce Kauffmann
+#### Hippocampus region extraction
 
-The repository of this project can be found [here](https://github.com/mtl-brainhack-school-2019/ecg_pupillometry_pipeline_kaufmann). The objective was to create a processing pipeline for ECG and pupillometry data. The motivation behind this task is that Marcel's lab (MIST Lab @ Polytechnique Montreal) was conducting a Human-Robot-Interaction user study. The repo features:
- * a [video introduction](http://www.youtube.com/watch/8ZVCNeX42_A) to the project.
- * a presentation [made in a jupyter notebook](https://github.com/mtl-brainhack-school-2019/ecg_pupillometry_pipeline_kaufmann/blob/master/BrainHackPresentation.ipynb) on the results of the project.
- * Notebooks for all analyses.
- * Detailed requirements files, making it easy for others to replicate the environment of the notebook.
- * An overview of the results in the markdown document.
+Following registration, a binary hippocampus mask was resampled to each aligned beta image using nearest-neighbor interpolation (`nilearn.image.resample_to_img`). The resampled mask ensured voxel-level correspondence between the mask and the functional images.
 
-##### Other projects
-Here are other good examples of repositories:
-- [Learning to manipulate biosignals with python](https://github.com/mtl-brainhack-school-2019/franclespinas-biosignals) by François Lespinasse
-- [Run multivariate anaylysis to relate behavioral and electropyhysiological data](https://github.com/mtl-brainhack-school-2019/PLS_PV_Behaviour)
-- [PET pipeline automation and structural MRI exploration](https://github.com/mtl-brainhack-school-2019/rwickens-sMRI-PET) by Rebekah Wickens
-- [Working with PSG [EEG] data from Parkinson's patients](https://github.com/mtl-brainhack-school-2019/Soraya-sleep-data-in-PD-patients) by Cryomatrix
-- [Exploring Brain Functional Activation in Adolescents Who Attempted Suicide](https://github.com/mtl-brainhack-school-2019/Anthony-Gifuni-repo) by Anthony Gifuni
+We then extracted signals specific to the hippocampus by multiplying each image with the resampled mask, effectively zeroing out all non-hippocampal voxels. The resulting hippocampus-only beta images were saved for further statistical analysis or visualization.
 
-#### Deliverable 3: Instructions
+An example of the hippocampus mask from AAL2 and hippocampus-masked output are shown below:
 
- To be made available soon.
+![Hippocampus Beta Map](figures/figure3.png.png)
+![Hippocampus Beta Map](figures/figure2.png.png)
 
-## Conclusion and acknowledgement
-
-The BHS team hope you will find this template helpful in documenting your project. Developping this template was a group effort, and benefitted from the feedback and ideas of all BHS students over the years.
-
-You can also make submit your project to neurolibre https://neurolibre.org/. It is a preprint server for interactive data analyses. It is tailored for publishing interactive neuroscience notebooks that can seamlessly integrate data, text, code and figures.The submission instructions can be found here https://docs.neurolibre.org/en/latest/index.html and the jupyter book docs there https://jupyterbook.org/intro.html.
