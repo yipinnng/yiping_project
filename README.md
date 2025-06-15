@@ -92,5 +92,5 @@ An example of the hippocampus mask from AAL2 and hippocampus-masked output are s
 
 ![Hippocampus Beta Map](figures/figure3.png)
 
-![Hippocampus Beta Map](figures/figure2.png)
+![Hippocampus Beta Map](figures/figure.png)
 
